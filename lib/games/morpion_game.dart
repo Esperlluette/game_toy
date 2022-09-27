@@ -12,6 +12,8 @@ class morpion_game extends StatefulWidget {
 class _morpion_gameState extends State<morpion_game> {
   int _counter = 1;
 
+  List<List<String>> _listTextButton= [["","","","","","","","",""]];
+
   final TextStyle _textStyle = const TextStyle(fontSize: 40);
   final List<List<int>> _condition = [
     [0, 1, 2],
@@ -24,35 +26,33 @@ class _morpion_gameState extends State<morpion_game> {
     [2, 4, 6]
   ];
 
-  Widget plateauBuilder() {
-    Column plateau = Column(
-      children: [Text("Tour : $_counter")],
-    );
 
+
+  Widget plateauBuilder() {
     List<String> keyRange = generateKey();
 
-    // for (var key in keyRange) {
-    //   plateau.children.add(
-    //     Row(
-    //       children: [],
-    //     )
-    //   );
-    // }
-    for (var i = 1; i <= 3; i++) {
-      List<String> keyRange = generateKey();
-      plateau.children.add(Row(
-        children: [
-          for (int j = 1; j <= 3; j++) ...[
-            TextButton(
-                key: Key(keyRange[i + j]),
-                onPressed: () => {tour(keyRange[i + j])},
-                child: Text("data"))
-          ]
-        ],
-      ));
-    }
+    GridView view = GridView.count(
+      crossAxisCount: 3,
+      padding: const EdgeInsets.all(10),
+      children: [
+        Container(
+          width: 60,
+        ),Text("Tour : $_counter"),Container(
+          width: 60,
+        ),
+        for (var key in keyRange) ...[
+          TextButton(
+            key: Key(key),
+            onPressed: () => {tour(key)},
+            //Ne fonctionne pas 
+            //je veux assigner une valeur du tableau _listTextButton au bouton qui lui correspond
+            child: Text(_listTextButton[int.parse(key)].toString()),
+          )
+        ]
+      ],
+    );
 
-    return plateau;
+    return view;
   }
 
   List<String> generateKey() {
@@ -65,12 +65,13 @@ class _morpion_gameState extends State<morpion_game> {
   }
 
   void tour(String key) {
-    log(key);
     changeText();
     incrementCounter();
   }
 
-  void changeText() {}
+  void changeText() {
+
+  }
 
   String hasWin() {
     return 'null';
@@ -85,6 +86,6 @@ class _morpion_gameState extends State<morpion_game> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: plateauBuilder());
+    return Center(child: plateauBuilder() );
   }
 }
