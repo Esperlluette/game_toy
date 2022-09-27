@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Game toy'),
     );
   }
 }
@@ -66,13 +66,13 @@ class HomePage extends StatelessWidget {
             TextButton(
                 onPressed: () => {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Taquin()))
+                          MaterialPageRoute(builder: (context) => const Taquin()))
                     },
                 child: const Text("Taquin")),
             TextButton(
                 onPressed: () => {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => morpion()))
+                          MaterialPageRoute(builder: (context) => const morpion()))
                     },
                 child: const Text("Morpion"))
           ],
